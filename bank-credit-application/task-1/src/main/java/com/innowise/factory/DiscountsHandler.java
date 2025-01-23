@@ -1,22 +1,12 @@
 package com.innowise.factory;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.innowise.constants.DataConstants;
+import com.innowise.template.AbstractDataHandler;
 
-public class DiscountsHandler implements DataHandler {
+public class DiscountsHandler extends AbstractDataHandler {
 
     @Override
-    public void handleData(JsonObject source, JsonObject target, String key) {
-        JsonArray discounts = source.getAsJsonArray("discounts");
-
-        if (discounts != null) {
-            JsonArray dbDiscounts = target.getAsJsonArray("discounts");
-            if (dbDiscounts == null) {
-                dbDiscounts = new JsonArray();
-                target.add("discounts", dbDiscounts);
-            }
-            dbDiscounts.addAll(discounts);
-            source.remove("discounts");
-        }
+    protected String getDataKey() {
+        return DataConstants.DISCOUNTS;
     }
 }

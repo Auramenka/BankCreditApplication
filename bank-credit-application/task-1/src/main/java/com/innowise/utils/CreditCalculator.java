@@ -19,13 +19,12 @@ public class CreditCalculator {
 
     public BigDecimal calculateInterest(Credit credit, LocalDate dateFrom, LocalDate dateTo) {
         BigDecimal currentDebt = credit.getMoney();
-        long daysBetween = ChronoUnit.DAYS.between(dateFrom, dateTo);
 
         long periodsPassed = switch (credit.getPeriodType()) {
-            case DAY -> daysBetween;
-            case WEEK -> daysBetween / 7;
-            case MONTH -> daysBetween / 30;
-            case YEAR -> daysBetween / 365;
+            case DAY -> ChronoUnit.DAYS.between(dateFrom, dateTo);
+            case WEEK -> ChronoUnit.WEEKS.between(dateFrom, dateTo);
+            case MONTH -> ChronoUnit.MONTHS.between(dateFrom, dateTo);
+            case YEAR -> ChronoUnit.YEARS.between(dateFrom, dateTo);
         };
 
         BigDecimal interestRate = BigDecimal.valueOf(credit.getRate()).divide(BigDecimal.valueOf(100), BigDecimal.ROUND_HALF_UP);

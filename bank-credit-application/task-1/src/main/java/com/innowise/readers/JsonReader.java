@@ -2,7 +2,13 @@ package com.innowise.readers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.innowise.model.*;
+import com.innowise.exceptions.JsonReadException;
+import com.innowise.model.Data;
+import com.innowise.model.User;
+import com.innowise.model.Credit;
+import com.innowise.model.Transaction;
+import com.innowise.model.Discount;
+import com.innowise.model.Event;
 import com.innowise.utils.LocalDateDeserializer;
 
 import java.io.BufferedReader;
@@ -14,6 +20,7 @@ import java.util.List;
 public class JsonReader {
 
     private static final String FILE_PATH = "task-1/data/db.json";
+    private static final String JSON_READ_ERROR = "Ошибка при чтении JSON файла";
     private final Data data;
 
     public JsonReader() {
@@ -28,7 +35,7 @@ public class JsonReader {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             return gson.fromJson(br, Data.class);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new JsonReadException(JSON_READ_ERROR);
         }
     }
 

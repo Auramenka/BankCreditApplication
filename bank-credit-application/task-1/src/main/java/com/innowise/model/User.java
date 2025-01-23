@@ -2,7 +2,9 @@ package com.innowise.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.innowise.model.enums.SexType;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter

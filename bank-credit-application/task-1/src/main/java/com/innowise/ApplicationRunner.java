@@ -1,5 +1,6 @@
 package com.innowise;
 
+import com.innowise.exceptions.FileManagerException;
 import com.innowise.managers.FileManager;
 import com.innowise.model.CreditResults;
 import com.innowise.model.Settings;
@@ -13,6 +14,8 @@ import java.util.List;
 
 public class ApplicationRunner {
 
+    private static final String JSON_READ_ERROR = "Ошибка при обработке файла";
+
     public void run() {
         try {
             FileManager fileManager = new FileManager();
@@ -25,7 +28,7 @@ public class ApplicationRunner {
 
             printCreditResults(creditResults);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileManagerException(JSON_READ_ERROR);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.innowise.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.innowise.utils.CreditCalculator;
 import com.innowise.model.enums.PeriodType;
 import com.innowise.state.ActiveCreditState;
 import com.innowise.state.CreditState;
@@ -11,7 +10,6 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter

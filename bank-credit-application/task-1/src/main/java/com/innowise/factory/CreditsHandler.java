@@ -1,22 +1,12 @@
 package com.innowise.factory;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.innowise.constants.DataConstants;
+import com.innowise.template.AbstractDataHandler;
 
-public class CreditsHandler implements DataHandler {
+public class CreditsHandler extends AbstractDataHandler {
 
     @Override
-    public void handleData(JsonObject source, JsonObject target, String key) {
-        JsonArray credits = source.getAsJsonArray("credits");
-
-        if (credits != null) {
-            JsonArray dbCredits = target.getAsJsonArray("credits");
-            if (dbCredits == null) {
-                dbCredits = new JsonArray();
-                target.add("credits", dbCredits);
-            }
-            dbCredits.addAll(credits);
-            source.remove("credits");
-        }
+    protected String getDataKey() {
+        return DataConstants.CREDITS;
     }
 }

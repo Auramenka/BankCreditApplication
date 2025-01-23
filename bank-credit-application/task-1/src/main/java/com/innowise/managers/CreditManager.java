@@ -40,5 +40,4 @@ public class CreditManager {
         credit.setMoney(BigDecimal.ZERO);
         credit.setRepayment(lastTransactionDate);
     }
-
 }

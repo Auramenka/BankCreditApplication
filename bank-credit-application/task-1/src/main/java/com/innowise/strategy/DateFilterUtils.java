@@ -1,6 +1,9 @@
 package com.innowise.strategy;
 
-import com.innowise.model.*;
+import com.innowise.model.Credit;
+import com.innowise.model.Settings;
+import com.innowise.model.Discount;
+import com.innowise.model.Transaction;
 
 import java.time.LocalDate;
 
