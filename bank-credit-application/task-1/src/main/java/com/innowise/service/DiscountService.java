@@ -3,9 +3,10 @@ package com.innowise.service;
 import com.innowise.model.Discount;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public interface DiscountService {
 
-    Discount findRelevantDiscount(LocalDate date);
+    Optional<Discount> findRelevantDiscount(LocalDate date);
 
 }

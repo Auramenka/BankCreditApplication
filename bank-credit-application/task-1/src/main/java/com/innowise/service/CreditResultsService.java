@@ -1,5 +1,6 @@
 package com.innowise.service;
 
+import com.innowise.exceptions.DiscountNotFoundException;
 import com.innowise.managers.CreditManager;
 import com.innowise.model.CreditResults;
 import com.innowise.model.Settings;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CreditResultsService {
+
+    private static final String RELEVANT_DISCOUNT_NOT_FOUND = "Relevant discount not found";
 
     private final UserService userService = new UserServiceImpl();
     private final CreditService creditService = new CreditServiceImpl();
@@ -63,7 +66,9 @@ public class CreditResultsService {
     }
 
     private CreditResults createCreditResult(User user, Credit credit, Settings settings, List<Event> events) {
-        Discount relevantDiscount = discountService.findRelevantDiscount(credit.getDate());
+        Discount relevantDiscount = discountService.findRelevantDiscount(credit.getDate())
+                .orElseThrow(() -> new DiscountNotFoundException(RELEVANT_DISCOUNT_NOT_FOUND));
+
         creditCalculator.applyDiscount(credit, relevantDiscount);
 
         List<Transaction> transactions = transactionService.getTransactionForCredit(credit.getId(), settings);

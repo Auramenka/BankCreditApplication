@@ -6,17 +6,17 @@ import com.innowise.model.Discount;
 import com.innowise.service.DiscountService;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class DiscountServiceImpl implements DiscountService {
 
     private final JsonReader jsonReader = new JsonReader();
 
     @Override
-    public Discount findRelevantDiscount(LocalDate date) {
+    public Optional<Discount> findRelevantDiscount(LocalDate date) {
         return jsonReader.getDiscounts()
                 .stream()
                 .filter(DateFilterUtils.discountFilter(date).isValid(null))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }
